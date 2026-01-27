@@ -31,10 +31,19 @@ class MainViewModel(val context: Context, val activity: MainActivity): ViewModel
         get() = this.model.isValidForm
 
     // TO DO: Agregar observers únicos de usuario y contraseña
-
+    val isUserNameValid: LiveData<Boolean>
+        get() = this.model.isUserNameValid
+    val isPasswordValid: LiveData<Boolean>
+        get() = this.model.isPasswordValid
     fun validateForm() {
         Log.i(TAG, "User: ${this.user}")
-        this.model.isValidForm.value = !(this.user.userName.isEmpty() || this.user.password.isEmpty())
+        //this.model.isValidForm.value = !(this.user.userName.isEmpty() || this.user.password.isEmpty())
+
+        //Agregamos las cosas que queremos que se observen en el modelo
+        this.model.isUserNameValid.value = this.user.userName.isNotEmpty()
+        this.model.isPasswordValid.value = this.user.password.isNotEmpty()
+        this.model.isValidForm.value = this.model.isUserNameValid.value!! && this.model.isPasswordValid.value!!
+
         Log.i(TAG, "isValid: ${this.model.isValidForm.value}")
 
         //TODO: Agregar observers únicos de usuario y contraseña

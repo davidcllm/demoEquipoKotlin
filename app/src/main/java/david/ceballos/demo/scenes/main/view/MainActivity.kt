@@ -54,11 +54,21 @@ class MainActivity : BaseActivity() {
         this.viewModel.isiValidForm.observe(this, Observer { isValid ->
             this.binding.btnLogin.isEnabled = isValid
 
-            this.binding.etUsername.error = if (isValid) null else "El usuario es requerido"
-            this.binding.etPassword.error = if (isValid) null else "La contraseña es requerida"
+            //this.binding.etUsername.error = if (isValid) null else "El usuario es requerido"
+            //this.binding.etPassword.error = if (isValid) null else "La contraseña es requerida"
         })
 
         // TODO: Agregar observers únicos de usuario y contrasña
+        //Observer para el usuario
+        this.viewModel.isUserNameValid.observe(this, Observer { isValid ->
+            this.binding.etUsername.error = if (isValid) null else "El usuario es requerido"
+        })
+
+        //Observer para la contraseña
+        this.viewModel.isPasswordValid.observe(this, Observer { isValid ->
+            this.binding.etPassword.error = if (isValid) null else "La contraseña es requerida"
+        })
+
     }
 
     /*override fun onCreate(savedInstanceState: Bundle?) {
