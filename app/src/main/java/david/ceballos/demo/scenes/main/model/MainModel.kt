@@ -8,4 +8,7 @@ data class MainModel (
     val isValidForm: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
 
     //TODO: Agregar observers únicos de usuario y contraseña
+    //Ponemos las cosas que queremos que se observen en el modelo
+    val isUserNameValid: MutableLiveData<Boolean> = MutableLiveData<Boolean>(),
+    val isPasswordValid: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
 )
