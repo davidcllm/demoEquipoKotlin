@@ -5,8 +5,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import david.ceballos.demo.scenes.base.BaseActivity
-import david.ceballos.demo.databinding.ActivityMainBinding
 import david.ceballos.demo.scenes.main.viewModel.MainViewModel
+import david.ceballos.helloworld.databinding.ActivityMainBinding
 
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding

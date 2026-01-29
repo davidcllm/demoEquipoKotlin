@@ -5,7 +5,7 @@ import david.ceballos.demo.dataClasses.User
 
 data class MainModel (
     var user: User = User(),
-    val isValidForm: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
+    val isValidForm: MutableLiveData<Boolean> = MutableLiveData<Boolean>(),
 
     //TODO: Agregar observers únicos de usuario y contraseña
     //Ponemos las cosas que queremos que se observen en el modelo
