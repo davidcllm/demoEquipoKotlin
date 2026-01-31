@@ -9,7 +9,8 @@ class SplashRouter (val context: Context, val activity: SplashActivity) {
     private val TAG = SplashRouter::class.java.simpleName
 
     /*
-    Navega al login de la aplicacion
+        Navega al login de la aplicacion
+        El intent permite la comunicacion entre modulos
      */
     fun routeToMainView() {
         //Levanta otra actividad
