@@ -1,4 +1,4 @@
-package david.ceballos.demo.scenes.main.home.model
+package david.ceballos.demo.scenes.home.model
 
 import androidx.lifecycle.MutableLiveData
 

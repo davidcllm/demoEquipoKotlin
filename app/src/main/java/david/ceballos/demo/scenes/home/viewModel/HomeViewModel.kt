@@ -1,10 +1,10 @@
-package david.ceballos.demo.scenes.main.home.viewModel
+package david.ceballos.demo.scenes.home.viewModel
 
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import david.ceballos.demo.scenes.base.BaseActivity
-import david.ceballos.demo.scenes.main.home.model.HomeModel
+import david.ceballos.demo.scenes.home.model.HomeModel
 
 class HomeViewModel(val context: Context, val activity: BaseActivity): ViewModel() {
     private val TAG = this::class.java.simpleName

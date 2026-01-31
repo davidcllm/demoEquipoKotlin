@@ -1,15 +1,11 @@
-package david.ceballos.demo.scenes.main.home.view
+package david.ceballos.demo.scenes.home.view
 
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import david.ceballos.demo.R
 import david.ceballos.demo.databinding.ActivityHomeBinding
 import david.ceballos.demo.scenes.base.BaseActivity
-import david.ceballos.demo.scenes.main.home.viewModel.HomeViewModel
+import david.ceballos.demo.scenes.home.viewModel.HomeViewModel
 
 class HomeActivity : BaseActivity() {
     private lateinit var binding: ActivityHomeBinding

@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HelloWorld">
         <activity
-            android:name=".scenes.main.home.view.HomeActivity"
+            android:name=".scenes.home.view.HomeActivity"
             android:exported="false" />
         <activity
             android:name=".scenes.splash.view.SplashActivity"
