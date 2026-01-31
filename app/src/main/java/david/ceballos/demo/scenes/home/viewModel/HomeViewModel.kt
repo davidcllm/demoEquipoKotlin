@@ -31,5 +31,5 @@ class HomeViewModel(val context: Context, val activity: BaseActivity): ViewModel
         Variable que permite obtner el nombre y cambiar su valor desde el model
      */
     val name: LiveData<String>
-        get() = this.name
+        get() = this.model.name
 }

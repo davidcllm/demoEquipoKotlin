@@ -3,8 +3,8 @@ package david.ceballos.demo.scenes.main.router
 import android.content.Context
 import android.content.Intent
 import david.ceballos.demo.scenes.base.BaseActivity
+import david.ceballos.demo.scenes.home.view.HomeActivity
 import david.ceballos.demo.scenes.home.viewModel.HomeViewModel
-import david.ceballos.demo.scenes.main.view.MainActivity
 
 class MainRouter(val context: Context, val activity: BaseActivity) {
     private val TAG = this::class.java.simpleName
@@ -14,7 +14,7 @@ class MainRouter(val context: Context, val activity: BaseActivity) {
      */
     fun routeToHomeView(name: String) {
         //Levanta otra actividad. Mercado libre
-        val intent = Intent(this.context, MainActivity::class.java)
+        val intent = Intent(this.context, HomeActivity::class.java)
 
         // PutExtra envia parametros
         intent.putExtra(HomeViewModel.PARAM_NAME, name)

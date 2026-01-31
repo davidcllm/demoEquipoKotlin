@@ -6,11 +6,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import david.ceballos.demo.dataClasses.User
 import david.ceballos.demo.scenes.main.model.MainModel
+import david.ceballos.demo.scenes.main.router.MainRouter
 import david.ceballos.demo.scenes.main.view.MainActivity
 
 class MainViewModel(val context: Context, val activity: MainActivity): ViewModel() {
     private val TAG = MainViewModel::class.java.simpleName
     private val model = MainModel()
+    private val router = MainRouter(context, activity)
 
     /*
 
@@ -49,7 +51,11 @@ class MainViewModel(val context: Context, val activity: MainActivity): ViewModel
         //TODO: Agregar observers únicos de usuario y contraseña
     }
 
+    /*
+        Funcion para iniciar sesion
+     */
     fun validateLogin() {
-
+        val name = "${this.user.userName}"
+        this.router.routeToHomeView(name)
     }
 }
