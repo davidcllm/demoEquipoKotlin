@@ -12,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HelloWorld">
         <activity
-            android:name="david.ceballos.demo.scenes.splash.view.SplashActivity"
+            android:name=".scenes.main.home.view.HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".scenes.splash.view.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
