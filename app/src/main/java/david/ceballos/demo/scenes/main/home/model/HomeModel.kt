@@ -1,4 +1,7 @@
 package david.ceballos.demo.scenes.main.home.model
 
-class HomeModel {
-}
+import androidx.lifecycle.MutableLiveData
+
+data class HomeModel (
+    val name: MutableLiveData<String> = MutableLiveData<String>()
+)
