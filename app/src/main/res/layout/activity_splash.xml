@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context="david.ceballos.demo.scenes.splash.view.SplashActivity">
 
     <ImageView
@@ -12,14 +15,12 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:src="@drawable/cruz_azul"
-        tools:layout_editor_absoluteX="-16dp"
-        tools:layout_editor_absoluteY="256dp" />
+        />
 
     <ProgressBar
         android:id="@+id/pb_splash"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="328dp" />
+        />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
