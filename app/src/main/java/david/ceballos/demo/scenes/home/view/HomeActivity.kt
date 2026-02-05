@@ -9,6 +9,7 @@ import david.ceballos.demo.databinding.ActivityHomeBinding
 import david.ceballos.demo.scenes.base.BaseActivity
 import david.ceballos.demo.scenes.home.viewModel.HomeViewModel
 import david.ceballos.demo.scenes.list.ListFragment
+import david.ceballos.demo.scenes.profile.ProfileFragment
 
 class HomeActivity : BaseActivity() {
     private lateinit var binding: ActivityHomeBinding
@@ -25,6 +26,7 @@ class HomeActivity : BaseActivity() {
         this.initActivityView()
         this.configurerListeners()
         this.replaceFragment(ListFragment())
+        //this.replaceFragment()
         //this.setObserver()
     }
 
@@ -42,7 +44,7 @@ class HomeActivity : BaseActivity() {
         this.binding.bnvHome.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.list_menu -> this.replaceFragment(ListFragment())
-                R.id.profile_menu -> this.replaceFragment(ListFragment())
+                R.id.profile_menu -> this.replaceFragment(ProfileFragment())
             }
             true
         }
