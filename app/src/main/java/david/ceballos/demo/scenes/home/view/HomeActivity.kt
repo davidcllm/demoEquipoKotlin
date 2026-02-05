@@ -20,7 +20,7 @@ class HomeActivity : BaseActivity() {
 
     private fun configureActivity() {
         this.initActivityView()
-        this.setObserver()
+        //this.setObserver()
     }
 
     private fun initActivityView() {
@@ -29,10 +29,10 @@ class HomeActivity : BaseActivity() {
         this.viewModel = HomeViewModel(this, this) // Inicializa el Home view model
     }
 
-    private fun setObserver() {
+    /*private fun setObserver() {
         this.viewModel.name.observe(this) { userName ->
             Log.i(TAG, "userName: $userName")
             this.binding.tvName.text = userName
         }
-    }
+    }*/
 }
