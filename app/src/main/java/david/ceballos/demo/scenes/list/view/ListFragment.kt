@@ -1,11 +1,10 @@
-package david.ceballos.demo.scenes.list
+package david.ceballos.demo.scenes.list.view
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import david.ceballos.demo.R
+import androidx.fragment.app.Fragment
 import david.ceballos.demo.databinding.FragmentListBinding
 
 class ListFragment : Fragment() {

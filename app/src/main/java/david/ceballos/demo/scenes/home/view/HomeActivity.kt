@@ -8,8 +8,8 @@ import david.ceballos.demo.R
 import david.ceballos.demo.databinding.ActivityHomeBinding
 import david.ceballos.demo.scenes.base.BaseActivity
 import david.ceballos.demo.scenes.home.viewModel.HomeViewModel
-import david.ceballos.demo.scenes.list.ListFragment
-import david.ceballos.demo.scenes.profile.ProfileFragment
+import david.ceballos.demo.scenes.list.view.ListFragment
+import david.ceballos.demo.scenes.profile.view.ProfileFragment
 
 class HomeActivity : BaseActivity() {
     private lateinit var binding: ActivityHomeBinding
