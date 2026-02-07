@@ -49,4 +49,11 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // Librería principal de Media3 para ExoPlayer
+    implementation("androidx.media3:media3-exoplayer:1.5.1")
+    // UI components (PlayerView para XML)
+    implementation("androidx.media3:media3-ui:1.5.1")
+    // Soporte para formatos comunes (Dash, HLS, etc.)
+    implementation("androidx.media3:media3-common:1.5.1")
 }
