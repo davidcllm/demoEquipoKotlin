@@ -26,13 +26,13 @@
         </provider>
 
         <activity
-            android:name=".scenes.help.HelpActivity"
+            android:name="david.ceballos.helloworld.scenes.help.HelpActivity"
             android:exported="false" />
         <activity
-            android:name=".scenes.home.view.HomeActivity"
+            android:name="david.ceballos.helloworld.scenes.home.view.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".scenes.splash.view.SplashActivity"
+            android:name="david.ceballos.helloworld.scenes.splash.view.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,7 +41,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".scenes.main.view.MainActivity"
+            android:name="david.ceballos.helloworld.scenes.main.view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

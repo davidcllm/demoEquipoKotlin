@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="?android:attr/actionBarSize"
-    tools:context=".scenes.profile.view.ProfileFragment">
+    tools:context="david.ceballos.helloworld.scenes.profile.view.ProfileFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
