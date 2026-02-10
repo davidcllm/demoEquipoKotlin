@@ -13,27 +13,28 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:src="@drawable/cruz_azul"/>
+        android:src="@drawable/logo_anahuac_2"/>
 
     <TextView
         android:id="@+id/tv_hello"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hola"
+        android:text="¡Bienvenido!"
         android:paddingBottom="15dp"
+        android:textSize="20sp"
          />
     <EditText
         android:id="@+id/et_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="usuario"
+        android:hint="Usuario"
         android:layout_margin="15dp"
         />
     <EditText
         android:id="@+id/et_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="password"
+        android:hint="Password"
         android:layout_margin="15dp"
         android:inputType="textPassword"
         />
@@ -44,6 +45,14 @@
         android:text="Login"
         android:layout_margin="15dp"
         android:backgroundTint="@color/black"
+        />
+    <TextView
+        android:id="@+id/tv_reistro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¿No tienes una cuenta? Regístrate"
+        android:paddingBottom="15dp"
+        android:textSize="14sp"
         />
 
 </LinearLayout>
