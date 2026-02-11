@@ -1,21 +1,94 @@
 package david.ceballos.helloworld.scenes.register.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import david.ceballos.demo.R
+import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.Observer
+import david.ceballos.demo.databinding.ActivityMainBinding
+import david.ceballos.helloworld.scenes.base.BaseActivity
+import david.ceballos.demo.databinding.ActivityRegisterBinding
+import david.ceballos.helloworld.scenes.main.view.MainActivity
+import david.ceballos.helloworld.scenes.main.viewModel.MainViewModel
+import david.ceballos.helloworld.scenes.register.viewModel.RegisterViewModel
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterActivity : BaseActivity() {
+    private lateinit var binding: ActivityRegisterBinding
+    private lateinit var viewModel: RegisterViewModel
+    private val TAG = MainActivity::class.java.simpleName
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_register)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        this.enableEdgeToEdge()
+        this.configureActivity()
+    }
+
+    private fun configureActivity() {
+        this.initActivityView()
+        this.configureListeners()
+        this.initComponents()
+        this.setObservers()
+    }
+
+    private fun initActivityView() {
+        this.binding = ActivityRegisterBinding.inflate(layoutInflater)
+        this.setContentView(this.binding.root)
+        this.viewModel = RegisterViewModel(this, this)
+    }
+
+    private fun configureListeners() {
+        this.binding.btnRegister.setOnClickListener {
+            this.viewModel.validateRegistration()
+        }
+        this.binding.etUsername.addTextChangedListener {
+            this.viewModel.user.userName = it.toString()
+            this.viewModel.validateForm()
+        }
+        this.binding.etName.addTextChangedListener {
+            this.viewModel.user.name = it.toString()
+            this.viewModel.validateForm()
+        }
+        this.binding.etLastName.addTextChangedListener {
+            this.viewModel.user.lastName = it.toString()
+            this.viewModel.validateForm()
+        }
+        this.binding.etPassword.addTextChangedListener {
+            this.viewModel.user.password = it.toString()
+            this.viewModel.validateForm()
+        }
+        this.binding.etPasswordConfirm.addTextChangedListener {
+            this.viewModel.user.password = it.toString()
+            this.viewModel.validateForm()
+        }
+        this.binding.tvRegistrate.setOnClickListener { // falta cambiar esto
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
         }
     }
+
+    private fun initComponents() {
+        this.binding.btnRegister.isEnabled = false
+    }
+
+    private fun setObservers() {
+        this.viewModel.isiValidForm.observe(this, Observer { isValid ->
+            this.binding.btnLogin.isEnabled = isValid
+
+            //this.binding.etUsername.error = if (isValid) null else "El usuario es requerido"
+            //this.binding.etPassword.error = if (isValid) null else "La contraseña es requerida"
+        })
+
+        // TODO: Agregar observers únicos de usuario y contrasña
+        //Observer para el usuario
+        this.viewModel.isUserNameValid.observe(this, Observer { isValid ->
+            this.binding.etUsername.error = if (isValid) null else "El usuario es requerido"
+        })
+
+        //Observer para la contraseña
+        this.viewModel.isPasswordValid.observe(this, Observer { isValid ->
+            this.binding.etPassword.error = if (isValid) null else "La contraseña es requerida"
+        })
+
+    }
+
 }
