@@ -5,17 +5,14 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
-import david.ceballos.demo.databinding.ActivityMainBinding
 import david.ceballos.helloworld.scenes.base.BaseActivity
 import david.ceballos.demo.databinding.ActivityRegisterBinding
-import david.ceballos.helloworld.scenes.main.view.MainActivity
-import david.ceballos.helloworld.scenes.main.viewModel.MainViewModel
 import david.ceballos.helloworld.scenes.register.viewModel.RegisterViewModel
 
 class RegisterActivity : BaseActivity() {
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var viewModel: RegisterViewModel
-    private val TAG = MainActivity::class.java.simpleName
+    private val TAG = RegisterActivity::class.java.simpleName
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,10 +57,10 @@ class RegisterActivity : BaseActivity() {
             this.viewModel.user.password = it.toString()
             this.viewModel.validateForm()
         }
-        this.binding.tvRegistrate.setOnClickListener { // falta cambiar esto
+        /*this.binding.tvRegistrate.setOnClickListener { // falta cambiar esto
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
-        }
+        }*/
     }
 
     private fun initComponents() {
@@ -72,17 +69,22 @@ class RegisterActivity : BaseActivity() {
 
     private fun setObservers() {
         this.viewModel.isiValidForm.observe(this, Observer { isValid ->
-            this.binding.btnLogin.isEnabled = isValid
+            this.binding.btnRegister.isEnabled = isValid
 
             //this.binding.etUsername.error = if (isValid) null else "El usuario es requerido"
             //this.binding.etPassword.error = if (isValid) null else "La contraseña es requerida"
         })
 
         // TODO: Agregar observers únicos de usuario y contrasña
+        // Observer para el nombre
+        this.viewModel.isNameValid.observe(this) { error ->
+            this.binding.etName.error = error
+        }
+
         //Observer para el usuario
-        this.viewModel.isUserNameValid.observe(this, Observer { isValid ->
-            this.binding.etUsername.error = if (isValid) null else "El usuario es requerido"
-        })
+        this.viewModel.isUserNameValid.observe(this) { error ->
+            this.binding.etUsername.error = error
+        }
 
         //Observer para la contraseña
         this.viewModel.isPasswordValid.observe(this, Observer { isValid ->
