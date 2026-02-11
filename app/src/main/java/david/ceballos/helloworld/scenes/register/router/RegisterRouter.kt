@@ -3,8 +3,6 @@ package david.ceballos.helloworld.scenes.register.router
 import android.content.Context
 import android.content.Intent
 import david.ceballos.helloworld.scenes.base.BaseActivity
-import david.ceballos.helloworld.scenes.home.view.HomeActivity
-import david.ceballos.helloworld.scenes.home.viewModel.HomeViewModel
 import david.ceballos.helloworld.scenes.main.view.MainActivity
 import david.ceballos.helloworld.scenes.main.viewModel.MainViewModel
 
