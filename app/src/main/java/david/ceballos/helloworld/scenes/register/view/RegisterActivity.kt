@@ -7,6 +7,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import david.ceballos.helloworld.scenes.base.BaseActivity
 import david.ceballos.demo.databinding.ActivityRegisterBinding
+import david.ceballos.helloworld.scenes.main.view.MainActivity
 import david.ceballos.helloworld.scenes.register.viewModel.RegisterViewModel
 
 class RegisterActivity : BaseActivity() {
@@ -57,10 +58,10 @@ class RegisterActivity : BaseActivity() {
             this.viewModel.user.confirmPassword = it.toString()
             this.viewModel.validateForm()
         }
-        /*this.binding.tvRegistrate.setOnClickListener { // falta cambiar esto
-            val intent = Intent(this, RegisterActivity::class.java)
+        this.binding.icBackRegister.setOnClickListener { // este es el boton de la flecha para ir hacia atras
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-        }*/
+        }
     }
 
     private fun initComponents() {
