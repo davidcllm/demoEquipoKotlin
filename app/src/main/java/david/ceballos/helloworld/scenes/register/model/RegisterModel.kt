@@ -7,7 +7,7 @@ data class RegisterModel (
     var user: User = User(),
     val isValidForm: MutableLiveData<Boolean> = MutableLiveData<Boolean>(),
     val isNameValid: MutableLiveData<String?> = MutableLiveData(),
-    val isLastNameValid: MutableLiveData<Boolean> = MutableLiveData<Boolean>(),
+    val isLastNameValid: MutableLiveData<String?> = MutableLiveData(),
     val isUserNameValid: MutableLiveData<String?> = MutableLiveData(),
     val isPasswordValid: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
 )

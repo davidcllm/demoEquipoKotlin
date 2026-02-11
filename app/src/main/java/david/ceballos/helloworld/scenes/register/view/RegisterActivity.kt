@@ -81,6 +81,11 @@ class RegisterActivity : BaseActivity() {
             this.binding.etName.error = error
         }
 
+        //Obbserver para el apellido
+        this.viewModel.isLastNameValid.observe(this) { error ->
+            this.binding.etLastName.error = error
+        }
+
         //Observer para el usuario
         this.viewModel.isUserNameValid.observe(this) { error ->
             this.binding.etUsername.error = error

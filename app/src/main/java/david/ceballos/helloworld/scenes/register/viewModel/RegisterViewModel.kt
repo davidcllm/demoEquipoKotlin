@@ -26,7 +26,7 @@ class RegisterViewModel(val context: Context, val activity: RegisterActivity): V
 
     val isNameValid: LiveData<String?>
         get() = this.model.isNameValid
-    val isLastNameValid: LiveData<Boolean>
+    val isLastNameValid: LiveData<String?>
         get() = this.model.isLastNameValid
     val isUserNameValid: LiveData<String?>
         get() = this.model.isUserNameValid
@@ -35,6 +35,18 @@ class RegisterViewModel(val context: Context, val activity: RegisterActivity): V
 
     fun validateForm() {
         Log.i(TAG, "User: ${this.user}")
+
+        // Validaciones para apellido
+        val lastName = user.lastName.trim()
+
+        val lastNameErrorMessage = when {
+            lastName.isEmpty() -> "El nombre es obligatorio"
+            lastName.length < 2 -> "Nombre muy corto"
+            lastName.length > 30 -> "Nombre muy largo"
+            !lastName.matches(Regex("^[A-Za-z ]+$")) -> "Solo se permiten letras y espacios"
+            else -> null
+        }
+        model.isLastNameValid.value = lastNameErrorMessage
 
         // Validaciones para nombre
         val name = user.name.trim()
