@@ -30,7 +30,7 @@ class RegisterViewModel(val context: Context, val activity: RegisterActivity): V
         get() = this.model.isLastNameValid
     val isUserNameValid: LiveData<String?>
         get() = this.model.isUserNameValid
-    val isPasswordValid: LiveData<Boolean>
+    val isPasswordValid: LiveData<String?>
         get() = this.model.isPasswordValid
 
     fun validateForm() {
@@ -71,9 +71,18 @@ class RegisterViewModel(val context: Context, val activity: RegisterActivity): V
         }
         model.isUserNameValid.value = userNameErrorMessage
 
-        /*this.model.isUserNameValid.value = this.user.userName.isNotEmpty()
-        this.model.isPasswordValid.value = this.user.password.isNotEmpty()
-        this.model.isValidForm.value = this.model.isUserNameValid.value!! && this.model.isPasswordValid.value!!*/
+        // Validaciones para contrasena
+        val password = user.password.trim()
+        val confirmPassword = user.confirmPassword
+
+        val passwordErrorMessage = when {
+            password.isEmpty() -> "La contraseña es obligatoria"
+            password.length < 8 -> "Debe tener al menos 8 caracteres"
+            !password.matches((Regex("^[A-Za-z0-9]+$"))) -> "No se permiten espacios"
+            !password.equals(confirmPassword) -> "Las contraseñas no coinciden"
+            else -> null
+        }
+        model.isPasswordValid.value = passwordErrorMessage
 
         Log.i(TAG, "isValid: ${this.model.isValidForm.value}")
 

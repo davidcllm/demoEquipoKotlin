@@ -9,5 +9,5 @@ data class RegisterModel (
     val isNameValid: MutableLiveData<String?> = MutableLiveData(),
     val isLastNameValid: MutableLiveData<String?> = MutableLiveData(),
     val isUserNameValid: MutableLiveData<String?> = MutableLiveData(),
-    val isPasswordValid: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
+    val isPasswordValid: MutableLiveData<String?> = MutableLiveData()
 )

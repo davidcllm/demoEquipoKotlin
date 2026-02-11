@@ -54,7 +54,7 @@ class RegisterActivity : BaseActivity() {
             this.viewModel.validateForm()
         }
         this.binding.etPasswordConfirm.addTextChangedListener {
-            this.viewModel.user.password = it.toString()
+            this.viewModel.user.confirmPassword = it.toString()
             this.viewModel.validateForm()
         }
         /*this.binding.tvRegistrate.setOnClickListener { // falta cambiar esto
@@ -92,9 +92,9 @@ class RegisterActivity : BaseActivity() {
         }
 
         //Observer para la contraseña
-        this.viewModel.isPasswordValid.observe(this, Observer { isValid ->
-            this.binding.etPassword.error = if (isValid) null else "La contraseña es requerida"
-        })
+        this.viewModel.isPasswordValid.observe(this) { error ->
+            this.binding.etPassword.error = error
+        }
 
     }
 
