@@ -32,6 +32,8 @@ class RegisterViewModel(val context: Context, val activity: RegisterActivity): V
         get() = this.model.isUserNameValid
     val isPasswordValid: LiveData<String?>
         get() = this.model.isPasswordValid
+    val isConfirmPasswordValid: LiveData<String?>
+        get() = this.model.isConfirmPasswordValid
 
     fun validateForm() {
         Log.i(TAG, "User: ${this.user}")
@@ -73,7 +75,6 @@ class RegisterViewModel(val context: Context, val activity: RegisterActivity): V
 
         // Validaciones para contrasena
         val password = user.password.trim()
-        val confirmPassword = user.confirmPassword
 
         val passwordErrorMessage = when {
             password.isEmpty() -> "La contraseña es obligatoria"
@@ -81,15 +82,26 @@ class RegisterViewModel(val context: Context, val activity: RegisterActivity): V
             !password.matches((Regex("^\\S+$"))) -> "No se permiten espacios"
             !password.matches(Regex(".*[a-z].*")) -> "Debe contener por lo menos una minúscula"
             !password.matches(Regex(".*[A-Z].*")) -> "Debe contener por lo menos una mayúscula"
-            !password.equals(confirmPassword) -> "Las contraseñas no coinciden"
             else -> null
         }
         model.isPasswordValid.value = passwordErrorMessage
 
+        //Validaciones para confirmar contrasena
+        val confirmPassword = user.confirmPassword.trim()
+
+        val confirmPasswordErrorMessage = when {
+            confirmPassword.isEmpty() -> "Debes confirmar la contraseña"
+            !password.equals(confirmPassword) -> "Las contraseñas no coinciden"
+            else -> null
+        }
+        model.isConfirmPasswordValid.value = confirmPasswordErrorMessage
+
+
         if (this.model.isNameValid.value == null &&
             this.model.isUserNameValid.value == null &&
             this.model.isLastNameValid.value == null &&
-            this.model.isPasswordValid.value == null) {
+            this.model.isPasswordValid.value == null &&
+            this.model.isConfirmPasswordValid.value == null) {
 
             this.model.isValidForm.value = true
         }

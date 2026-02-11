@@ -94,6 +94,11 @@ class RegisterActivity : BaseActivity() {
             this.binding.etPassword.error = error
         }
 
+        //Observer para la confirmacion de contrasena
+        this.viewModel.isConfirmPasswordValid.observe(this) { error ->
+            this.binding.etPasswordConfirm.error = error
+        }
+
     }
 
 }
