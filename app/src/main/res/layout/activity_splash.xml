@@ -14,13 +14,14 @@
         android:id="@+id/iv_logo"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:src="@drawable/cruz_azul"
+        android:src="@drawable/logo_anahuac_2"
         />
 
     <ProgressBar
         android:id="@+id/pb_splash"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="10dp"
         />
 
 </LinearLayout>
