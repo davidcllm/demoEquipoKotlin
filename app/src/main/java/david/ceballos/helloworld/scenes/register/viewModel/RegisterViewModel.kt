@@ -78,7 +78,7 @@ class RegisterViewModel(val context: Context, val activity: RegisterActivity): V
         val passwordErrorMessage = when {
             password.isEmpty() -> "La contraseña es obligatoria"
             password.length < 8 -> "Debe tener al menos 8 caracteres"
-            !password.matches((Regex("^[A-Za-z0-9]+$"))) -> "No se permiten espacios"
+            !password.matches((Regex("^\\S+$"))) -> "No se permiten espacios"
             !password.equals(confirmPassword) -> "Las contraseñas no coinciden"
             else -> null
         }
