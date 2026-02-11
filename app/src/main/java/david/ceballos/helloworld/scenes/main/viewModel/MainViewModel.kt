@@ -51,6 +51,12 @@ class MainViewModel(val context: Context, val activity: MainActivity): ViewModel
         //TODO: Agregar observers únicos de usuario y contraseña
     }
 
+    companion object {
+        val PARAM_NAME = "PARAM_NAME"
+
+        fun hello() = print("Hello World")
+    }
+
     /*
         Funcion para iniciar sesion
      */

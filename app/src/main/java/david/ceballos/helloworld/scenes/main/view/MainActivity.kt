@@ -1,11 +1,13 @@
 package david.ceballos.helloworld.scenes.main.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import david.ceballos.helloworld.scenes.base.BaseActivity
 import david.ceballos.helloworld.scenes.main.viewModel.MainViewModel
+import david.ceballos.helloworld.scenes.register.view.RegisterActivity
 import david.ceballos.demo.databinding.ActivityMainBinding
 
 class MainActivity : BaseActivity() {
@@ -43,6 +45,10 @@ class MainActivity : BaseActivity() {
         this.binding.etPassword.addTextChangedListener {
             this.viewModel.user.password = it.toString()
             this.viewModel.validateForm()
+        }
+        this.binding.tvRegistrate.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
         }
     }
 
