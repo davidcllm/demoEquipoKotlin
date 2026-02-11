@@ -52,9 +52,9 @@ class RegisterViewModel(val context: Context, val activity: RegisterActivity): V
         val lastName = user.lastName.trim()
 
         val lastNameErrorMessage = when {
-            lastName.isEmpty() -> "El nombre es obligatorio"
-            lastName.length < 2 -> "Nombre muy corto"
-            lastName.length > 30 -> "Nombre muy largo"
+            lastName.isEmpty() -> "El apellido es obligatorio"
+            lastName.length < 2 -> "Apellido muy corto"
+            lastName.length > 30 -> "Apellido muy largo"
             !lastName.matches(Regex("^[A-Za-z ]+$")) -> "Solo se permiten letras y espacios"
             else -> null
         }
@@ -83,6 +83,17 @@ class RegisterViewModel(val context: Context, val activity: RegisterActivity): V
             else -> null
         }
         model.isPasswordValid.value = passwordErrorMessage
+
+        if (this.model.isNameValid.value == null &&
+            this.model.isUserNameValid.value == null &&
+            this.model.isLastNameValid.value == null &&
+            this.model.isPasswordValid.value == null) {
+
+            this.model.isValidForm.value = true
+        }
+        else {
+            this.model.isValidForm.value = false
+        }
 
         Log.i(TAG, "isValid: ${this.model.isValidForm.value}")
 

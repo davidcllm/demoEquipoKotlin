@@ -70,9 +70,6 @@ class RegisterActivity : BaseActivity() {
     private fun setObservers() {
         this.viewModel.isiValidForm.observe(this, Observer { isValid ->
             this.binding.btnRegister.isEnabled = isValid
-
-            //this.binding.etUsername.error = if (isValid) null else "El usuario es requerido"
-            //this.binding.etPassword.error = if (isValid) null else "La contraseña es requerida"
         })
 
         // TODO: Agregar observers únicos de usuario y contrasña
