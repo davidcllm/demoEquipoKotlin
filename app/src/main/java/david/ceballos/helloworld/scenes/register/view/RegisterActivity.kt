@@ -2,13 +2,17 @@ package david.ceballos.helloworld.scenes.register.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
 import david.ceballos.helloworld.scenes.base.BaseActivity
 import david.ceballos.demo.databinding.ActivityRegisterBinding
 import david.ceballos.helloworld.scenes.main.view.MainActivity
 import david.ceballos.helloworld.scenes.register.viewModel.RegisterViewModel
+import david.ceballos.helloworld.sharedPreference.SharedPreferenceConstants
+import david.ceballos.helloworld.sharedPreference.SharedPreferenceManager
 
 class RegisterActivity : BaseActivity() {
     private lateinit var binding: ActivityRegisterBinding
@@ -37,7 +41,18 @@ class RegisterActivity : BaseActivity() {
     private fun configureListeners() {
         this.binding.btnRegister.setOnClickListener {
             this.viewModel.validateRegistration()
+
+            // Mensaje registro exitoso
+            /*Snackbar.make(this.binding.main, "Registro exitoso", Snackbar.LENGTH_INDEFINITE)
+                .setAction("Iniciar sesión") {
+                    this.finish()
+                }
+                .show()*/
+
+            // otro tipo de mensaje
+            Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show()
         }
+
         this.binding.etUsername.addTextChangedListener {
             this.viewModel.user.userName = it.toString()
             this.viewModel.validateForm()

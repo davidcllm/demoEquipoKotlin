@@ -8,11 +8,14 @@ import david.ceballos.helloworld.dataClasses.User
 import david.ceballos.helloworld.scenes.main.model.MainModel
 import david.ceballos.helloworld.scenes.main.router.MainRouter
 import david.ceballos.helloworld.scenes.main.view.MainActivity
+import david.ceballos.helloworld.sharedPreference.SharedPreferenceConstants
+import david.ceballos.helloworld.sharedPreference.SharedPreferenceManager
 
 class MainViewModel(val context: Context, val activity: MainActivity): ViewModel() {
     private val TAG = MainViewModel::class.java.simpleName
     private val model = MainModel()
     private val router = MainRouter(context, activity)
+    private val sharedPreferenceManager = SharedPreferenceManager(context)
 
     /*
 
@@ -62,6 +65,21 @@ class MainViewModel(val context: Context, val activity: MainActivity): ViewModel
      */
     fun validateLogin() {
         val name = "${this.user.userName}"
-        this.router.routeToHomeView(name)
+        val sharedKey = this.sharedPreferenceManager.getBoolean(SharedPreferenceConstants.IS_REGISTERED_KEY)
+        val sharedUserName = this.sharedPreferenceManager.getString(SharedPreferenceConstants.USER_KEY)
+        val sharedPassword = this.sharedPreferenceManager.getString(SharedPreferenceConstants.PASSWORD_KEY)
+
+
+        if ( sharedKey &&
+            sharedPassword == this.user.password &&
+            sharedUserName == this.user.userName) {
+
+            this.model.isValidForm.value = true
+            this.router.routeToHomeView(name)
+
+        }
+        else {
+            Log.i(TAG, "Error")
+        }
     }
 }

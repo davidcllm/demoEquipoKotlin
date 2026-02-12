@@ -8,11 +8,14 @@ import david.ceballos.helloworld.dataClasses.User
 import david.ceballos.helloworld.scenes.register.model.RegisterModel
 import david.ceballos.helloworld.scenes.register.router.RegisterRouter
 import david.ceballos.helloworld.scenes.register.view.RegisterActivity
+import david.ceballos.helloworld.sharedPreference.SharedPreferenceConstants
+import david.ceballos.helloworld.sharedPreference.SharedPreferenceManager
 
 class RegisterViewModel(val context: Context, val activity: RegisterActivity): ViewModel() {
     private val TAG = this::class.java.simpleName
     private val model = RegisterModel()
     private val router = RegisterRouter(context, activity)
+    private val sharedPreferenceManager = SharedPreferenceManager(context)
 
     var user: User
         get() = this.model.user
@@ -115,6 +118,18 @@ class RegisterViewModel(val context: Context, val activity: RegisterActivity): V
 
     fun validateRegistration() {
         val name = "${this.user.userName}"
+        // guardar usuario y contrasena
+        this.sharedPreferenceManager.setString(SharedPreferenceConstants.USER_KEY, this.user.userName)
+        this.sharedPreferenceManager.setString(SharedPreferenceConstants.PASSWORD_KEY, this.user.password)
+
+        // guardar nombre y apellidos
+        this.sharedPreferenceManager.setString(SharedPreferenceConstants.USER_NAME_KEY, name)
+        this.sharedPreferenceManager.setString(SharedPreferenceConstants.USER_LASTNAME_KEY, this.user.lastName)
+
+        this.sharedPreferenceManager.setBoolean(SharedPreferenceConstants.IS_REGISTERED_KEY, true)
+
         this.router.routeToMainView(name)
+
+        Log.i(TAG, this.sharedPreferenceManager.getString(SharedPreferenceConstants.USER_NAME_KEY))
     }
 }

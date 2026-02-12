@@ -11,15 +11,6 @@ class RegisterRouter(val context: Context, val activity: BaseActivity) {
 
     // Regresar al login
     fun routeToMainView(name: String) {
-        //Levanta otra actividad. Mercado libre
-        val intent = Intent(this.context, MainActivity::class.java)
-
-        // PutExtra envia parametros
-        intent.putExtra(MainViewModel.PARAM_NAME, name)
-
-        //starActivity inicia el intent
-        this.context.startActivity(intent)
-
         // Finaliza la actividad actual para no poder retroceder
         // Si no se coloca el usuatio puede retroceder a la actividad anterior
         this.activity.finish() // Finaliza la actividad actual
