@@ -76,6 +76,11 @@ class MainActivity : BaseActivity() {
             this.binding.etPassword.error = if (isValid) null else "La contraseña es requerida"
         })
 
+        //Mostrar error de credenciales
+        this.viewModel.errorMessage.observe(this) { message ->
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     /*override fun onCreate(savedInstanceState: Bundle?) {

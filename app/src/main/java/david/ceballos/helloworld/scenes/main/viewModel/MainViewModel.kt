@@ -3,6 +3,7 @@ package david.ceballos.helloworld.scenes.main.viewModel
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import david.ceballos.helloworld.dataClasses.User
 import david.ceballos.helloworld.scenes.main.model.MainModel
@@ -16,6 +17,7 @@ class MainViewModel(val context: Context, val activity: MainActivity): ViewModel
     private val model = MainModel()
     private val router = MainRouter(context, activity)
     private val sharedPreferenceManager = SharedPreferenceManager(context)
+    val errorMessage = MutableLiveData<String>()
 
     /*
 
@@ -79,7 +81,7 @@ class MainViewModel(val context: Context, val activity: MainActivity): ViewModel
 
         }
         else {
-            Log.i(TAG, "Error")
+            errorMessage.value = "Usuario o contraseña incorrectos."
         }
     }
 }
