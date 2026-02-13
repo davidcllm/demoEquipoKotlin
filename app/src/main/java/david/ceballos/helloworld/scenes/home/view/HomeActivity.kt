@@ -1,6 +1,8 @@
 package david.ceballos.helloworld.scenes.home.view
 
 import android.os.Bundle
+import android.util.Log
+import android.view.Gravity
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.fragment.app.Fragment
@@ -27,7 +29,7 @@ class HomeActivity : BaseActivity() {
         this.configurerListeners()
         this.replaceFragment(ListFragment())
         //this.replaceFragment()
-        //this.setObserver()
+        this.setObserver()
     }
 
     private fun initActivityView() {
@@ -55,10 +57,16 @@ class HomeActivity : BaseActivity() {
         fragmentTransaction.replace(R.id.fl_content, fragment).commit()
     }
 
-    /*private fun setObserver() {
+    private fun setObserver() {
         this.viewModel.name.observe(this) { userName ->
-            Log.i(TAG, "userName: $userName")
-            this.binding.tvName.text = userName
+            //Log.i(TAG, "userName: $userName")
+            this.binding.tvName.text = "Hola, $userName"
+
+
+            // Esto no sé por qué se pone abajo en lugar de arriba
+            val toast = Toast.makeText(this, "Bienvenido, $userName!", Toast.LENGTH_SHORT)
+            toast.setGravity(Gravity.TOP, 0, 0)
+            toast.show()
         }
-    }*/
+    }
 }
