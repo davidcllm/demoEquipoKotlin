@@ -59,23 +59,35 @@
         android:layout_margin="15dp"
         />
 
-    <EditText
-        android:id="@+id/et_password"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Contraseña"
         android:layout_margin="15dp"
-        android:inputType="textPassword"
-        />
+        app:passwordToggleEnabled="true">
 
-    <EditText
-        android:id="@+id/et_password_confirm"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Contraseña"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Confirmar Contraseña"
         android:layout_margin="15dp"
-        android:inputType="textPassword"
-        />
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_password_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Confirmar Contraseña"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btn_register"
@@ -83,7 +95,7 @@
         android:layout_height="wrap_content"
         android:text="Registrarme"
         android:layout_margin="15dp"
-        android:backgroundTint="@color/orange"
+        android:backgroundTint="@color/purple"
         android:layout_gravity="center_horizontal"
         />
 
