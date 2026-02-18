@@ -60,7 +60,7 @@ class HomeActivity : BaseActivity() {
     private fun setObserver() {
         this.viewModel.name.observe(this) { userName ->
             //Log.i(TAG, "userName: $userName")
-            this.binding.tvName.text = "Hola, $userName"
+            //this.binding.tvName.text = "Hola, $userName"
 
 
             // Esto no sé por qué se pone abajo en lugar de arriba
