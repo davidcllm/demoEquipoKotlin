@@ -13,7 +13,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:src="@drawable/logo_anahuac_2"/>
+        android:src="@drawable/ic_logo_news"/>
 
     <TextView
         android:id="@+id/tv_hello"
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:text="Login"
         android:layout_margin="15dp"
-        android:backgroundTint="@color/orange"
+        android:backgroundTint="@color/blue"
         />
 
     <LinearLayout
@@ -69,7 +69,7 @@
             android:text=" Regístrate"
             android:paddingBottom="15dp"
             android:textSize="14sp"
-            android:textColor="@color/orange"
+            android:textColor="@color/blue"
             android:textStyle="bold"
             android:clickable="true"
             android:focusable="true"

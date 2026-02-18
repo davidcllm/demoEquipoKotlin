@@ -95,7 +95,7 @@
         android:layout_height="wrap_content"
         android:text="Registrarme"
         android:layout_margin="15dp"
-        android:backgroundTint="@color/purple"
+        android:backgroundTint="@color/blue"
         android:layout_gravity="center_horizontal"
         />
 
