@@ -57,4 +57,6 @@ dependencies {
     // Soporte para formatos comunes (Dash, HLS, etc.)
     implementation("androidx.media3:media3-common:1.5.1")
     implementation("com.google.android.material:material:1.x.x")
+
+    implementation("androidx.biometric:biometric-compose:1.4.0-alpha05")
 }

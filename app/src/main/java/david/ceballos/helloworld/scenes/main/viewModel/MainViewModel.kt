@@ -1,7 +1,12 @@
 package david.ceballos.helloworld.scenes.main.viewModel
 
+import Utilities.Biometric.BiometricAuthListener
+import Utilities.Biometric.BiometricUtil
 import android.content.Context
 import android.util.Log
+import android.widget.Toast
+import androidx.biometric.BiometricPrompt
+import androidx.biometric.internal.BiometricViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,7 +17,7 @@ import david.ceballos.helloworld.scenes.main.view.MainActivity
 import david.ceballos.helloworld.sharedPreference.SharedPreferenceConstants
 import david.ceballos.helloworld.sharedPreference.SharedPreferenceManager
 
-class MainViewModel(val context: Context, val activity: MainActivity): ViewModel() {
+class MainViewModel(val context: Context, val activity: MainActivity): ViewModel(), BiometricAuthListener {
     private val TAG = MainViewModel::class.java.simpleName
     private val model = MainModel()
     private val router = MainRouter(context, activity)
@@ -83,5 +88,26 @@ class MainViewModel(val context: Context, val activity: MainActivity): ViewModel
         else {
             errorMessage.value = "Usuario o contraseña incorrectos."
         }
+    }
+
+    fun useBiometrics() {
+        BiometricUtil.showBiometricPrompt(
+            activity = activity,
+            listener = this,
+            cryptoObject = null,
+            allowDeviceCredential = true
+        )
+    }
+
+    override fun onBiometricAuthenticationSuccess(result: BiometricPrompt.AuthenticationResult) {
+        Toast.makeText(context, "Authentication success!", Toast.LENGTH_SHORT).show()
+        this.router.routeToHomeView("")
+    }
+
+    override fun onBiometricAuthenticationError(
+        errorCode: Int,
+        errorMessage: String
+    ) {
+        Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
     }
 }

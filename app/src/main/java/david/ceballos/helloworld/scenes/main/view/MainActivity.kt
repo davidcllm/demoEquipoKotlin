@@ -51,6 +51,9 @@ class MainActivity : BaseActivity() {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
+        this.binding.btnLoginFace.setOnClickListener {
+            this.viewModel.useBiometrics()
+        }
     }
 
     private fun initComponents() {
