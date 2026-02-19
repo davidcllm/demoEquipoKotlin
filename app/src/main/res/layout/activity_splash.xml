@@ -14,7 +14,7 @@
         android:id="@+id/iv_logo"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:src="@drawable/logo_anahuac_2"
+        android:src="@drawable/ic_logo_news"
         />
 
     <ProgressBar

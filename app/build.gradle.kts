@@ -56,4 +56,5 @@ dependencies {
     implementation("androidx.media3:media3-ui:1.5.1")
     // Soporte para formatos comunes (Dash, HLS, etc.)
     implementation("androidx.media3:media3-common:1.5.1")
+    implementation("com.google.android.material:material:1.x.x")
 }
