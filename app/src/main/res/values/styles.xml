@@ -3,4 +3,18 @@
     <style name="ThemeOverlay.MySwitchBlue" parent="">
         <item name="colorPrimary">@color/blue</item>
     </style>
+
+    <style name="Widget.App.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <!-- Estas líneas controlan el color del ícono y el texto -->
+        <item name="itemIconTint">@color/bottom_nav_item_color</item>
+        <item name="itemTextColor">@color/bottom_nav_item_color</item>
+
+        <!-- Controla el color del "sombreado" o fondo indicador del ítem activo -->
+        <item name="itemActiveIndicatorStyle">@style/Widget.App.BottomNavigationView.ActiveIndicator</item>
+    </style>
+
+    <!-- Estilo del Indicador -->
+    <style name="Widget.App.BottomNavigationView.ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/light_blue</item>
+    </style>
 </resources>
