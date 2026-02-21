@@ -24,6 +24,6 @@ class SplashViewModel (context: Context, activity: SplashActivity): ViewModel() 
         Handler().postDelayed({
             Log.i(TAG, "Navegamos al login")
             this.router.routeToMainView()
-        }, 2500)
+        }, 5000)
     }
 }

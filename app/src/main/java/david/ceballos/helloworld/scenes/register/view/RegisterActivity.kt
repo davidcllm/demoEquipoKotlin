@@ -74,8 +74,7 @@ class RegisterActivity : BaseActivity() {
             this.viewModel.validateForm()
         }
         this.binding.icBackRegister.setOnClickListener { // este es el boton de la flecha para ir hacia atras
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            this.finish()
         }
     }
 

@@ -57,6 +57,9 @@ dependencies {
     // Soporte para formatos comunes (Dash, HLS, etc.)
     implementation("androidx.media3:media3-common:1.5.1")
     implementation("com.google.android.material:material:1.x.x")
-
+    //Soporte de FaceID
     implementation("androidx.biometric:biometric-compose:1.4.0-alpha05")
+    //Soporte para el splash
+    //implementation(libs.dotlottie.android)
+    implementation("com.airbnb.android:lottie:6.4.1")
 }
