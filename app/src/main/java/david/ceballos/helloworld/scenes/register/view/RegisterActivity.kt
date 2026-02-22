@@ -105,12 +105,12 @@ class RegisterActivity : BaseActivity() {
 
         //Observer para la contraseña
         this.viewModel.isPasswordValid.observe(this) { error ->
-            this.binding.etPassword.error = error
+            this.binding.tilPassword.error = error
         }
 
         //Observer para la confirmacion de contrasena
         this.viewModel.isConfirmPasswordValid.observe(this) { error ->
-            this.binding.etPasswordConfirm.error = error
+            this.binding.tilPasswordConfirm.error = error
         }
 
     }

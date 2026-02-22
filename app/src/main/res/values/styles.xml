@@ -17,4 +17,9 @@
     <style name="Widget.App.BottomNavigationView.ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:color">@color/light_blue</item>
     </style>
+
+    <!-- Hace que el cuadro donde está el texto de las contraseñas tenga el borde azul-->
+    <style name="TemaInputAzul" parent="">
+        <item name="colorPrimary">@color/dark_blue</item>
+    </style>
 </resources>
