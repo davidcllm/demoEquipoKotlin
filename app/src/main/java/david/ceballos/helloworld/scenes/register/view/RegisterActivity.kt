@@ -74,8 +74,7 @@ class RegisterActivity : BaseActivity() {
             this.viewModel.validateForm()
         }
         this.binding.icBackRegister.setOnClickListener { // este es el boton de la flecha para ir hacia atras
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            this.finish()
         }
     }
 
@@ -106,12 +105,12 @@ class RegisterActivity : BaseActivity() {
 
         //Observer para la contraseña
         this.viewModel.isPasswordValid.observe(this) { error ->
-            this.binding.etPassword.error = error
+            this.binding.tilPassword.error = error
         }
 
         //Observer para la confirmacion de contrasena
         this.viewModel.isConfirmPasswordValid.observe(this) { error ->
-            this.binding.etPasswordConfirm.error = error
+            this.binding.tilPasswordConfirm.error = error
         }
 
     }
