@@ -34,11 +34,7 @@ class ProfileFragment : Fragment() {
     ): View? {
         this.binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-        this.binding.cvHelp.setOnClickListener {
-            this.startActivity(
-                Intent(activity, HelpActivity::class.java)
-            )
-        }
+
 
         this.binding.btnTakePhoto.setOnClickListener {
             val prefix = "photo-"

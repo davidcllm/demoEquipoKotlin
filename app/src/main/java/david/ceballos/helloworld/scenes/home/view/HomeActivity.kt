@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import david.ceballos.demo.R
 import david.ceballos.demo.databinding.ActivityHomeBinding
 import david.ceballos.helloworld.scenes.base.BaseActivity
-import david.ceballos.helloworld.scenes.config.view.ConfigFragment
 import david.ceballos.helloworld.scenes.home.viewModel.HomeViewModel
 import david.ceballos.helloworld.scenes.list.view.ListFragment
 import david.ceballos.helloworld.scenes.profile.view.ProfileFragment
@@ -48,7 +47,7 @@ class HomeActivity : BaseActivity() {
             when (item.itemId) {
                 R.id.list_menu -> this.replaceFragment(ListFragment())
                 R.id.profile_menu -> this.replaceFragment(ProfileFragment())
-                R.id.config_menu -> this.replaceFragment(ConfigFragment())
+                // ELIMINADO config_menu
             }
             true
         }
