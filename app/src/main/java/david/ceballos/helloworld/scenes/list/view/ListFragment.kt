@@ -19,6 +19,8 @@ class ListFragment : Fragment() {
     ): View? {
         this.binding = FragmentListBinding.inflate(inflater, container, false)
 
+        this.listWorker = ListWorker(requireContext())
+
         this.listWorker.exampleGET(
             onSuccess = {
 

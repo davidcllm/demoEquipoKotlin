@@ -1,6 +1,7 @@
 package david.ceballos.helloworld.scenes.list.worker
 
 import android.content.Context
+import android.util.Log
 import com.crepalatchi.mx.Networking.Models.Encoding
 import com.crepalatchi.mx.Networking.Models.HTTPMethod
 import com.crepalatchi.mx.Networking.RequestListener
@@ -14,6 +15,7 @@ import nombre.apellido.helloworld.Networking.Models.AnahuacAPI
 import org.json.JSONObject
 
 class ListWorker(var context: Context) {
+    private val TAG = this::class.java.simpleName
     private val requestManager = RequestManager(context)
     private val gson = Gson()
 
@@ -29,6 +31,7 @@ class ListWorker(var context: Context) {
                 try {
                     val response = gson.fromJson(response, GetPokemon::class.java)
                     val list = response.results ?: emptyList()
+                    Log.i(TAG, response.toString())
                     if (list.isNotEmpty())
                         onSuccess(list)
                     else
