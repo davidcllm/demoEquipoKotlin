@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import david.ceballos.demo.databinding.FragmentListBinding
+import david.ceballos.helloworld.scenes.list.worker.ListWorker
 
 class ListFragment : Fragment() {
     private lateinit var binding: FragmentListBinding
+    private lateinit var listWorker: ListWorker
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -16,6 +18,17 @@ class ListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         this.binding = FragmentListBinding.inflate(inflater, container, false)
+
+        this.listWorker = ListWorker(requireContext())
+
+        this.listWorker.exampleGET(
+            onSuccess = {
+
+            },
+            onError = {
+
+            }
+        )
         return this.binding.root
     }
 

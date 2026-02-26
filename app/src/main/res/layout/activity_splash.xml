@@ -10,18 +10,34 @@
     android:orientation="vertical"
     tools:context="david.ceballos.demo.david.ceballos.helloworld.scenes.splash.view.SplashActivity">
 
+    <!--
     <ImageView
         android:id="@+id/iv_logo"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:src="@drawable/ic_logo_news"
         />
+-->
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieSplash"
+        android:layout_width="330dp"
+        android:layout_height="330dp"
+        app:lottie_fileName="Globe_Animation.json"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+    <!--
     <ProgressBar
         android:id="@+id/pb_splash"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         />
+-->
+
 
 </LinearLayout>

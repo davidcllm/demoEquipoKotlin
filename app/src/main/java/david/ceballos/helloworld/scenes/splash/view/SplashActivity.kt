@@ -1,20 +1,25 @@
 package david.ceballos.helloworld.scenes.splash.view
 
+import david.ceballos.demo.R
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
+
 import david.ceballos.demo.databinding.ActivitySplashBinding
 import david.ceballos.helloworld.scenes.base.BaseActivity
 import david.ceballos.helloworld.scenes.splash.viewModel.SplashViewModel
+
 
 class SplashActivity : BaseActivity() {
     private lateinit var binding: ActivitySplashBinding
     private lateinit var viewModel: SplashViewModel
     private val TAG = SplashActivity::class.java.simpleName
+    //val dotLottieAnimationView = findViewById<DotLottieAnimation>(R.id.lottie_view)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.enableEdgeToEdge()
         this.configureActivity()
+        this.configureLottie()
     }
 
     /*
@@ -29,6 +34,10 @@ class SplashActivity : BaseActivity() {
         this.binding = ActivitySplashBinding.inflate(layoutInflater)
         this.setContentView(this.binding.root)
         this.viewModel = SplashViewModel(this, this)
+    }
+
+    private fun configureLottie(){
+
     }
 
 }

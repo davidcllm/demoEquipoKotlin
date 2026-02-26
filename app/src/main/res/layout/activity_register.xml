@@ -31,72 +31,115 @@
             android:text="Registro"
             android:gravity="center"
             android:textStyle="bold"
-            android:textSize="20dp" />
+            android:textSize="30dp" />
 
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/et_username"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Usuario"
-        android:layout_margin="15dp"
-        />
+        android:layout_margin="30dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp">
 
-    <EditText
-        android:id="@+id/et_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nombre(s)"
-        android:layout_margin="15dp"
-        />
-
-    <EditText
-        android:id="@+id/et_last_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Apellido(s)"
-        android:layout_margin="15dp"
-        />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        app:passwordToggleEnabled="true">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_password"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Contraseña"
-            android:inputType="textPassword" />
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:padding="24dp"
+            android:background="@drawable/custom_edittext">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <EditText
+                android:id="@+id/et_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Usuario"
+                android:layout_margin="15dp"
+                />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        app:passwordToggleEnabled="true">
+            <EditText
+                android:id="@+id/et_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nombre(s)"
+                android:layout_margin="15dp"
+                />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_password_confirm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Confirmar Contraseña"
-            android:inputType="textPassword" />
+            <EditText
+                android:id="@+id/et_last_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Apellido(s)"
+                android:layout_margin="15dp"
+                />
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                app:passwordToggleEnabled="true"
+                android:backgroundTint="@color/dark_blue"
+                android:theme="@style/TemaInputAzul"
+                app:errorIconDrawable="@null"
+                >
 
-    <Button
-        android:id="@+id/btn_register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Registrarme"
-        android:layout_margin="15dp"
-        android:backgroundTint="@color/blue"
-        android:layout_gravity="center_horizontal"
-        />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Contraseña"
+                    android:inputType="textPassword" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_password_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                app:passwordToggleEnabled="true"
+                android:backgroundTint="@color/dark_blue"
+                android:theme="@style/TemaInputAzul"
+                app:errorIconDrawable="@null"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_password_confirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Confirmar Contraseña"
+                    android:inputType="textPassword" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Registrarme"
+                android:textSize="18sp"
+                android:layout_margin="15dp"
+                android:layout_marginTop="30dp"
+                android:backgroundTint="@color/dark_blue"
+                android:layout_gravity="center_horizontal"
+                app:cornerRadius = "20dp"
+                />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+
+
+
+
+
 
 </LinearLayout>
