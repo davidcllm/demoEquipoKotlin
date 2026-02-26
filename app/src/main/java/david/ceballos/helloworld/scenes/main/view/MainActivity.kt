@@ -22,6 +22,11 @@ class MainActivity : BaseActivity() {
         this.configureActivity()
     }
 
+    override fun onResume() {
+        super.onResume()
+        this.viewModel.loadUserFromPreferences()
+    }
+
     private fun configureActivity() {
         this.initActivityView()
         this.configureListeners()
@@ -82,6 +87,16 @@ class MainActivity : BaseActivity() {
         //Mostrar error de credenciales
         this.viewModel.errorMessage.observe(this) { message ->
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        }
+
+        //Mostrar username usuario
+        this.viewModel.name.observe(this) { userName ->
+            this.binding.tvHello.text =
+                if (userName.isNullOrBlank()) {
+                    "Bienvenido"
+                } else {
+                    "Bienvenido, $userName!"
+                }
         }
 
     }
