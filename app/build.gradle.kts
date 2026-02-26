@@ -59,6 +59,10 @@ dependencies {
     implementation("com.google.android.material:material:1.x.x")
     //Soporte de FaceID
     implementation("androidx.biometric:biometric-compose:1.4.0-alpha05")
+
+    // WEB SERVICES
+    implementation("com.android.volley:volley:1.2.1")
+    implementation("com.google.code.gson:gson:2.13.2")
     //Soporte para el splash
     //implementation(libs.dotlottie.android)
     implementation("com.airbnb.android:lottie:6.4.1")
