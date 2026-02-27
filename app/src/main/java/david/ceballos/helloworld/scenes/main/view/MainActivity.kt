@@ -4,17 +4,20 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import david.ceballos.helloworld.scenes.base.BaseActivity
 import david.ceballos.helloworld.scenes.main.viewModel.MainViewModel
 import david.ceballos.helloworld.scenes.register.view.RegisterActivity
 import david.ceballos.demo.databinding.ActivityMainBinding
+import david.ceballos.helloworld.scenes.profile.viewModel.ProfileViewModel
 
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel
     private val TAG = MainActivity::class.java.simpleName
+    private val profileViewModel: ProfileViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,6 +100,10 @@ class MainActivity : BaseActivity() {
                 } else {
                     "Bienvenido, $userName!"
                 }
+        }
+
+        this.profileViewModel.isFaceIdEnabled.observe(this) { isEnabled ->
+            this.binding.btnLoginFace.isEnabled = isEnabled
         }
 
     }

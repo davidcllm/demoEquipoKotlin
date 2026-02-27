@@ -66,4 +66,6 @@ dependencies {
     //Soporte para el splash
     //implementation(libs.dotlottie.android)
     implementation("com.airbnb.android:lottie:6.4.1")
+
+    implementation("androidx.fragment:fragment-ktx:1.6.2")
 }
