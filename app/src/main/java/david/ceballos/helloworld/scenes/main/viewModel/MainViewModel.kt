@@ -67,6 +67,13 @@ class MainViewModel(val context: Context, val activity: MainActivity): ViewModel
         fun hello() = print("Hello World")
     }
 
+    init {
+        this.model.name.value = (this.activity.intent.getSerializableExtra(PARAM_NAME) as? String) ?: ""
+    }
+
+    val name: LiveData<String>
+        get() = this.model.name
+
     /*
         Funcion para iniciar sesion
      */
@@ -88,6 +95,12 @@ class MainViewModel(val context: Context, val activity: MainActivity): ViewModel
         else {
             errorMessage.value = "Usuario o contraseña incorrectos."
         }
+    }
+
+    fun loadUserFromPreferences() {
+        val name = sharedPreferenceManager.getString(SharedPreferenceConstants.USER_NAME_KEY)
+
+        model.name.value = name
     }
 
     fun useBiometrics() {

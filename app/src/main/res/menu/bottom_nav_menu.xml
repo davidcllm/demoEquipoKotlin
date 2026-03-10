@@ -6,11 +6,7 @@
         android:icon="@drawable/ic_news"
         />
 
-    <item
-        android:id="@+id/config_menu"
-        android:title="Configuración"
-        android:icon="@drawable/ic_config"
-        />
+
 
     <item
         android:id="@+id/profile_menu"

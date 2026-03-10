@@ -10,13 +10,16 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import david.ceballos.demo.databinding.FragmentProfileBinding
 import david.ceballos.helloworld.scenes.help.HelpActivity
+import david.ceballos.helloworld.scenes.profile.viewModel.ProfileViewModel
 import java.io.File
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     lateinit var pictureUri: Uri
+    private val viewModel: ProfileViewModel by activityViewModels()
 
     private val takePicture = registerForActivityResult(ActivityResultContracts.TakePicture()) { iImageSaved ->
         if (iImageSaved)
@@ -34,11 +37,7 @@ class ProfileFragment : Fragment() {
     ): View? {
         this.binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-        this.binding.cvHelp.setOnClickListener {
-            this.startActivity(
-                Intent(activity, HelpActivity::class.java)
-            )
-        }
+
 
         this.binding.btnTakePhoto.setOnClickListener {
             val prefix = "photo-"
@@ -64,6 +63,10 @@ class ProfileFragment : Fragment() {
 
     private fun configureListeners() {
         //this.binding.cvHelpCenter.setOnClickListener { this.viewModel.routeToHelpView() }
+
+        this.binding.switchConfigFaceID.setOnCheckedChangeListener { _, isChecked ->
+            this.viewModel.setFaceIdEnabled(isChecked)
+        }
 
 
     }
