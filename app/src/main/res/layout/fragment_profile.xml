@@ -105,6 +105,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:text="Face ID"
+                    android:layout_marginLeft="70dp"
                     android:textSize="20dp" />
 
                 <com.google.android.material.materialswitch.MaterialSwitch
@@ -112,6 +113,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
+                    android:layout_marginRight="70dp"
                     android:theme="@style/ThemeOverlay.MySwitchBlue" />
             </LinearLayout>
 
