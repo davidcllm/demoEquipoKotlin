@@ -1,14 +1,21 @@
 package david.ceballos.helloworld.scenes.list.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import david.ceballos.demo.databinding.FragmentListBinding
-import david.ceballos.helloworld.dataClasses.News
+
 import david.ceballos.helloworld.scenes.list.adapter.NewsAdapter
 import david.ceballos.helloworld.scenes.list.worker.ListWorker
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import david.ceballos.helloworld.dataClasses.Article
+
+
+
 
 class ListFragment : Fragment() {
     private lateinit var binding: FragmentListBinding
@@ -23,34 +30,34 @@ class ListFragment : Fragment() {
 
         this.listWorker = ListWorker(requireContext())
 
-        setupRecyclerView()
+        // recyclerView de arranque con lista vacía
+        setupRecyclerView(emptyList())
 
-        this.listWorker.exampleGET(
-            onSuccess = {
-
+        // llamada al API
+        this.listWorker.getNews(
+            // si funciona, actualiza la lista
+            onSuccess = { articles -> activity?.runOnUiThread {
+                updateNewsList(articles)
+                }
             },
-            onError = {
-
+            onError = { errorMessage -> activity?.runOnUiThread {
+                // si falla, mostrar mensajito de error y mandamos al logcat
+                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+                Log.e("ListFragment", errorMessage)
+                }
             }
         )
         return this.binding.root
     }
 
-    private fun setupRecyclerView() {
-        /*
-        Estos datos son únicamente de prueba, ya de acuerdo con la información
-        del API de noticias es que tendremos que modificar esta carga de datos para que cargue
-        las noticias del API y también tendremos que cambiar el dataclass de News de
-        acuerdo a la información que devuelva el API.
-         */
-        val newsData = listOf(
-            News("El Noticiero","11 Mar 2026","Pasó algo en el Ángel de la Independencia","Subtítulo","Wow, que noticia tan interesante"),
-            News("Reforma", "11 Mar 2026", "Debes de leer estos 10 libros antes de morir", "Subtítulo", "Una noticia muy interesante ...")
-        )
+    private fun setupRecyclerView(initialList: List<Article>) {
 
-        //Configuración del RecyclerView
-        val adapter = NewsAdapter(newsData)
-        binding.rvNews.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(requireContext())
+        binding.rvNews.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvNews.adapter = NewsAdapter(initialList)
+    }
+
+    private fun updateNewsList(newArticles: List<Article>){
+        val adapter = NewsAdapter(newArticles)
         binding.rvNews.adapter = adapter
     }
 

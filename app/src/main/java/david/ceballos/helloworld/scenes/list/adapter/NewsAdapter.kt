@@ -4,9 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import david.ceballos.demo.databinding.RecylerNewsBinding
+import david.ceballos.helloworld.dataClasses.Article
 import david.ceballos.helloworld.dataClasses.News
 
-class NewsAdapter(private val newsList: List<News>) : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
+class NewsAdapter(private val newsList: List<Article>) : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
     /*
     Esta es la clase "caja" que se usa para almacenar y mantener las
@@ -29,14 +30,14 @@ class NewsAdapter(private val newsList: List<News>) : RecyclerView.Adapter<NewsA
     con los nombres que tenga esa noticia en específico (nombre, noticiero, fecha, etc)
      */
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
-        val news = newsList[position]
+        val article = newsList[position]
         with(holder.binding) {
-            txtTitleHeader.text = news.sourceName
-            txtDate.text = news.date
-            txtNewsTitle.text = news.title
-            txtSubtitle.text = news.subtitle
-            txtDescription.text = news.description
-            txtInitial.text = news.sourceName.take(1) //Esto es para poner la primera letra del noticiero en el ícono de la noticia
+            txtTitleHeader.text = article.source.name
+            txtDate.text = article.publishedAt.take(10)
+            txtNewsTitle.text = article.title
+            txtSubtitle.text = article.author ?: "Autor no encontrado"
+            txtDescription.text = article.description ?: "Descripción no disponible"
+            txtInitial.text = article.source.name.take(1) //Esto es para poner la primera letra del noticiero en el ícono de la noticia
         }
     }
 
