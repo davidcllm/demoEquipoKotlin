@@ -15,3 +15,5 @@
 local.properties
 .idea/deploymentTargetSelector.xml
 /.idea
+#app/src/.env
+app/src/main/assets/.env
