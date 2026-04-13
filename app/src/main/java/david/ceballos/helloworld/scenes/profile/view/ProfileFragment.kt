@@ -37,8 +37,6 @@ class ProfileFragment : Fragment() {
     ): View? {
         this.binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-
-
         this.binding.btnTakePhoto.setOnClickListener {
             val prefix = "photo-"
             val postfix = System.currentTimeMillis().toString()
@@ -58,7 +56,20 @@ class ProfileFragment : Fragment() {
             this.galleryLauncher.launch("image/*")
         }
 
+        configureListeners()
         return this.binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Sincroniza el switch con el valor persistido
+        viewModel.isFaceIdEnabled.observe(viewLifecycleOwner) { isEnabled ->
+            // Evita disparar el listener al setear el valor programáticamente
+            binding.switchConfigFaceID.setOnCheckedChangeListener(null)
+            binding.switchConfigFaceID.isChecked = isEnabled
+            configureListeners() // re-adjunta el listener después de setear
+        }
     }
 
     private fun configureListeners() {
