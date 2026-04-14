@@ -76,5 +76,7 @@ dependencies {
     implementation("com.airbnb.android:lottie:6.4.1")
 
     implementation("androidx.fragment:fragment-ktx:1.6.2")
-    implementation("io.github.cdimascio:dotenv-kotlin:6.4.1")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+
+
 }
