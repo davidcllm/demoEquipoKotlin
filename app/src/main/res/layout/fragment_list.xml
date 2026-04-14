@@ -67,7 +67,6 @@
 
     </LinearLayout>
 
-
     <!--falta implementar el scroll view-->
     <ScrollView
         android:layout_width="match_parent"
