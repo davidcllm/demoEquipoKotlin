@@ -5,8 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import david.ceballos.demo.databinding.RecylerNewsBinding
 import david.ceballos.helloworld.dataClasses.Article
-import david.ceballos.helloworld.dataClasses.News
 
+// adaptador que conecta la lista de artículos con el RecyclerView
+// recibe una lista de art. y los muestra en pantalla
 class NewsAdapter(private val newsList: List<Article>) : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
     /*
@@ -27,17 +28,21 @@ class NewsAdapter(private val newsList: List<Article>) : RecyclerView.Adapter<Ne
 
     /*
     Esta función lo que hace es que da la información de cada elemento de fila
-    con los nombres que tenga esa noticia en específico (nombre, noticiero, fecha, etc)
+    con los nombres que tenga esa noticia en específico (titulo, autor, fecha, etc)
      */
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         val article = newsList[position]
         with(holder.binding) {
-            txtTitleHeader.text = article.source.name
+            txtTitleHeader.text = article.source?.name ?: "Fuente desconocida"
+            // solo toma los primeros 10 caracteres del dateTime (la parte de la fecha, sin la hora)
             txtDate.text = article.publishedAt.take(10)
             txtNewsTitle.text = article.title
             txtSubtitle.text = article.author ?: "Autor no encontrado"
+            // descripción corta, o mensaje por defecto si no viene en la respuesta
             txtDescription.text = article.description ?: "Descripción no disponible"
-            txtInitial.text = article.source.name.take(1) //Esto es para poner la primera letra del noticiero en el ícono de la noticia
+
+            //Esto es para poner la primera letra del noticiero en el ícono de la noticia
+            txtInitial.text = article.source?.name?.take(1) ?: "?"
         }
     }
 

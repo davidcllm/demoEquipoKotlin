@@ -1,7 +1,5 @@
 package david.ceballos.helloworld.dataClasses
 
-import android.app.appsearch.SearchResults
-import androidx.appcompat.widget.DialogTitle
 import com.google.gson.annotations.SerializedName
 // mapea el nombre de una llave en un archivo JSON con una variable en el codigo
 // ej: source_name -> sourceName
@@ -14,27 +12,36 @@ recyclerview.
 
 // objeto que recibe la respuesta de la búsqueda
 data class News (
-    val status: String,
-    val totalResults: Int,
-    val articles: List<Article>
+    val articles: ArticleWrapper
+    // Contiene un objeto "articles" con la lista de resultados
+
+)
+
+// lista de artículos
+data class ArticleWrapper(
+    val results: List<Article>, // lista de artículos devueltos
+    val totalResults: Int       // total de artículos que coinciden con la búsqueda
 )
 
 
-// el artículo
+
+// el artículo individual
+// @SerializedName mapea el nombre de una llave en el JSON con una variable en el código
+// "image" del JSON se guarda en la variable "urlToImage"
 data class Article(
-    @SerializedName("source") val source: Source,
+    val source: Source?,
     val author: String?,
     val title: String,
     val description: String?,
-    val urlval : String,
-    val urlToImage: String?,
-    @SerializedName ("publishedAt") val publishedAt: String,
+    val url: String?,
+    @SerializedName ("image") val urltoImage: String?,  // URL de la imagen (en el JSON viene como "image")
+    @SerializedName ("dateTime") val publishedAt: String,  // lo mismo que arriba "dateTime" a "publishedAt"
     val content: String?
-
 )
 
 // fuente del artículo
 data class Source(
     val id: String?,
-    val name: String
-)
+    @SerializedName ("title") val name: String,
+
+    )
