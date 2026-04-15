@@ -39,7 +39,7 @@ class ListWorker(var context: Context) {
     // obtiene una lista de articulso del API de la categoría especificada
     // onSuccess: se ejecuta con la lista de artículos si la llamada fue exitosa
     // onError: mensaje de error si algo sale mal
-    fun getNews(category: String = "tendencias",
+    fun getNews(query: String,
                 onSuccess: (response: List<Article>) -> Unit,
                 onError: (error: String) -> Unit)
 
@@ -48,10 +48,17 @@ class ListWorker(var context: Context) {
         val apiKey = BuildConfig.API_KEY
         //Log.d(TAG, "API KEY: $apiKey")
 
+
+        // Si el query coincide con una categoría predefinida, usa su keyword mapeado
+        // Si no, usa el query directamente como búsqueda libre del usuario
+        val keyword = categoryToKeyword(query).let{ mapped ->
+            if (mapped == "noticias" && query != "tendencias") query else mapped
+        }
+
         // Cuerpo de la petición POST en formato JSON
         val body = JSONObject().apply {
             put("action", "getArticles")
-            put("keyword", categoryToKeyword(category))  //  keyword según la categoría seleccionada
+            put("keyword", keyword)  //  keyword según la categoría seleccionada
             put("lang", "spa")     // filtra articulos en español
             put("articlesPage", 1)  // 1 página de resultados
             put("articlesCount", 20)    // 20 artículos por página
@@ -74,8 +81,8 @@ class ListWorker(var context: Context) {
                     // convierte el JSON de respuesta al modelo de datos News
                     val newsResponse = gson.fromJson(response, News::class.java)
 
-                    // los articuslo vienen dentro de articles.results
-                    val list = newsResponse.articles?.results ?: emptyList()
+                    // los articulos vienen dentro de articles.results
+                    val list = newsResponse.articleResponse?.results ?: emptyList()
                     Log.i(TAG, "Noticias encontradas: ${list.size}")
 
                     if (list.isNotEmpty()) {
@@ -86,6 +93,7 @@ class ListWorker(var context: Context) {
                 }
                 catch (e: Exception){
                     Log.e(TAG, "Error parseando datos: ${e.message}")
+                    e.printStackTrace()
                     onError("Error procesando noticias")
                 }
             }

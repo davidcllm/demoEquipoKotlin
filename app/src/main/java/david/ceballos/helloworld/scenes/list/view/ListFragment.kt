@@ -12,6 +12,7 @@ import david.ceballos.helloworld.scenes.list.adapter.NewsAdapter
 import david.ceballos.helloworld.scenes.list.worker.ListWorker
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.savedstate.serialization.saved
 import david.ceballos.helloworld.dataClasses.Article
 
 
@@ -27,32 +28,59 @@ class ListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         this.binding = FragmentListBinding.inflate(inflater, container, false)
+        return this.binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         this.listWorker = ListWorker(requireContext())
-
-        // lee la categoría que se pasó como argumento al crear el fragmento
-        // por defecto (si no se pasa ninguno), será 'tendencias'
-        val category = arguments?.getString("category") ?: "tendencias"
-
-        // recyclerView de arranque con lista vacía mientras espera la respuesta del API
+        binding.rvNews.layoutManager = LinearLayoutManager(requireContext())
         setupRecyclerView(emptyList())
 
-        // llamada al API para obtener las noticias de la categoría correspondiente
+        // Listeners de búsqueda
+        binding.icSearch.setOnClickListener {
+            ejecutarBusqueda()
+        }
+
+        // Si el usuario pulsa "Enter" en el teclado:
+        binding.etSearch.setOnEditorActionListener { _, _, _ ->
+            ejecutarBusqueda()
+            true
+        }
+
+        // 2. Carga inicial (tendencias o categoría previa)
+        val category = arguments?.getString("category") ?: "tendencias"
+        llamarApi(category)
+    }
+
+    private fun ejecutarBusqueda() {
+        val query = binding.etSearch.text.toString().trim()
+        if (query.isNotEmpty()) {
+            llamarApi(query)
+        } else {
+            Toast.makeText(requireContext(), "Escribe algo para buscar", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun llamarApi(query: String) {
         this.listWorker.getNews(
-            // si funciona, actualiza la lista con los artículos recibidos
-            onSuccess = { articles -> activity?.runOnUiThread {
-                updateNewsList(articles)
+            query = query,
+            onSuccess = { articles ->
+                Log.i("PRUEBA", "Primer título: ${articles.firstOrNull()?.title}")
+                activity?.runOnUiThread {
+                    updateNewsList(articles)
                 }
             },
-            onError = { errorMessage -> activity?.runOnUiThread {
-                // si falla, mostrar mensajito de error y mandamos al logcat
-                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
-                Log.e("ListFragment", errorMessage)
+            onError = { errorMessage ->
+                activity?.runOnUiThread {
+                    Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+                    Log.e("ListFragment", errorMessage)
                 }
             }
         )
-        return this.binding.root
     }
+
+
 
     // configura el RecyclerView con una lista vertical, lo inicializa con la lista que se pasó
     private fun setupRecyclerView(initialList: List<Article>) {
@@ -62,7 +90,12 @@ class ListFragment : Fragment() {
     }
     // reemplaza el adaptador del RecyclerView con los nuevos artículos recibidos del API
     private fun updateNewsList(newArticles: List<Article>){
-        binding.rvNews.adapter = NewsAdapter(newArticles)
+        Log.d("ListFragment", "Llegaron ${newArticles.size} artículos al fragmento")
+        binding.rvNews.post {
+            binding.rvNews.adapter = NewsAdapter(newArticles)
+            binding.rvNews.adapter?.notifyDataSetChanged()
+            Log.d("ListFragment", "Adaptador actualizado con ${newArticles.size} elementos")
+        }
     }
 
     /*
