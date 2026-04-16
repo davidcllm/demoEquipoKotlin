@@ -45,7 +45,6 @@ class NewsAdapter(private val newsList: List<Article>) : RecyclerView.Adapter<Ne
             // solo toma los primeros 10 caracteres del dateTime (la parte de la fecha, sin la hora)
             txtDate.text = article.publishedAt.take(10)
             txtNewsTitle.text = article.title
-            txtSubtitle.text = article.author ?: "Autor no encontrado"
             // descripción corta, o mensaje por defecto si no viene en la respuesta
             txtDescription.text = article.description ?: "Descripción no disponible"
 
