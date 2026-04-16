@@ -1,13 +1,17 @@
 package david.ceballos.helloworld.scenes.list.adapter
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.compose.ui.unit.IntRect
 //import androidx.appcompat.R
 import david.ceballos.demo.R
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import david.ceballos.demo.databinding.RecylerNewsBinding
 import david.ceballos.helloworld.dataClasses.Article
+import androidx.core.net.toUri
 
 
 // adaptador que conecta la lista de artículos con el RecyclerView
@@ -48,6 +52,14 @@ class NewsAdapter(private val newsList: List<Article>) : RecyclerView.Adapter<Ne
             //Esto es para poner la primera letra del noticiero en el ícono de la noticia
             txtInitial.text = article.source?.name?.take(1) ?: "?"
 
+            btnMore.setOnClickListener{
+                article.url?.let { url ->
+                    val intent = Intent(Intent.ACTION_VIEW, url.toUri())
+                    holder.itemView.context.startActivity(intent)
+                    }
+                }
+            }
+
             // images
             if (!article.urltoImage.isNullOrEmpty()){
                 Glide.with(holder.binding.root.context)
@@ -58,7 +70,6 @@ class NewsAdapter(private val newsList: List<Article>) : RecyclerView.Adapter<Ne
                 holder.binding.imgNews.setImageResource(R.drawable.imagedefault)
 
             }
-        }
     }
 
     //Le dice al RecyclerView cuántos elementos hay en total en la lista de noticias
