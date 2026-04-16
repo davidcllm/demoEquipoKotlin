@@ -16,4 +16,5 @@ object SharedPreferenceConstants {
     const val IS_LOGGED_KEY = "IS_LOGGED_KEY"
     const val IS_REGISTERED_KEY = "IS_REGISTERED_KEY"
     const val JWT_KEY = "hola123"
+    const val IS_BIOMETRIC_ENABLED_KEY = "IS_BIOMETRIC_ENABLED_KEY"
 }

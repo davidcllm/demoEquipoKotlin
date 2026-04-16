@@ -12,7 +12,9 @@ import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import david.ceballos.demo.databinding.FragmentProfileBinding
+import david.ceballos.helloworld.scenes.base.BaseActivity
 import david.ceballos.helloworld.scenes.help.HelpActivity
+import david.ceballos.helloworld.scenes.profile.router.ProfileRouter
 import david.ceballos.helloworld.scenes.profile.viewModel.ProfileViewModel
 import java.io.File
 
@@ -20,6 +22,7 @@ class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     lateinit var pictureUri: Uri
     private val viewModel: ProfileViewModel by activityViewModels()
+    private lateinit var router: ProfileRouter
 
     private val takePicture = registerForActivityResult(ActivityResultContracts.TakePicture()) { iImageSaved ->
         if (iImageSaved)
@@ -36,8 +39,6 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         this.binding = FragmentProfileBinding.inflate(inflater, container, false)
-
-
 
         this.binding.btnTakePhoto.setOnClickListener {
             val prefix = "photo-"
@@ -58,7 +59,22 @@ class ProfileFragment : Fragment() {
             this.galleryLauncher.launch("image/*")
         }
 
+        configureListeners()
         return this.binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        router = ProfileRouter(requireContext(), BaseActivity())
+
+        // Sincroniza el switch con el valor persistido
+        viewModel.isFaceIdEnabled.observe(viewLifecycleOwner) { isEnabled ->
+            // Evita disparar el listener al setear el valor programáticamente
+            binding.switchConfigFaceID.setOnCheckedChangeListener(null)
+            binding.switchConfigFaceID.isChecked = isEnabled
+            configureListeners() // re-adjunta el listener después de setear
+        }
     }
 
     private fun configureListeners() {
@@ -68,8 +84,6 @@ class ProfileFragment : Fragment() {
             this.viewModel.setFaceIdEnabled(isChecked)
         }
 
-
+        this.binding.btnLogout.setOnClickListener { this.router.routeToMainView("") }
     }
-
-
 }
