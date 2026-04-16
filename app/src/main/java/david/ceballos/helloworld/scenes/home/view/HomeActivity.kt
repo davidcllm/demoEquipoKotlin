@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.Gravity
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.ui.semantics.text
 import androidx.fragment.app.Fragment
 import david.ceballos.demo.R
 import david.ceballos.demo.databinding.ActivityHomeBinding
@@ -18,18 +19,16 @@ class HomeActivity : BaseActivity() {
     private lateinit var viewModel: HomeViewModel
     private val TAG = this::class.java.simpleName
 
+    // variables de las tabs para evitar que se descarten al cambiar entre cada una
+    private var listFragment: ListFragment? = null
+    private var profileFragment: ProfileFragment? = null
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.enableEdgeToEdge()
         this.configureActivity()
-    }
-
-    private fun configureActivity() {
-        this.initActivityView()
-        this.configurerListeners()
-        this.replaceFragment(ListFragment())
-        //this.replaceFragment()
-        this.setObserver()
     }
 
     private fun initActivityView() {
@@ -42,20 +41,40 @@ class HomeActivity : BaseActivity() {
 
     }
 
+    private fun configureActivity(){
+        this.initActivityView()
+        this.configurerListeners()
+
+        // crea los fragmentos una sola vez y los agrega al contenedor
+        listFragment = ListFragment.newInstance("tendencias")
+        profileFragment = ProfileFragment()
+
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fl_content, listFragment!!, "list")
+            .add(R.id.fl_content, profileFragment!!, "profile")
+            .hide(profileFragment!!)  // oculta perfil al inicio
+            .commit()
+        this.setObserver()
+    }
+
     private fun configurerListeners() {
+
+
         this.binding.bnvHome.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.list_menu -> this.replaceFragment(ListFragment())
-                R.id.profile_menu -> this.replaceFragment(ProfileFragment())
-                // ELIMINADO config_menu
+                // reutiliza el fragmento si ya existe en lugar de crear uno nuevo
+                R.id.list_menu -> showFragment(listFragment!!, profileFragment!!)
+                R.id.profile_menu -> showFragment(profileFragment!!, listFragment!!)
             }
             true
         }
     }
-
-    private fun replaceFragment(fragment: Fragment) {
-        val fragmentTransaction = this.supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fl_content, fragment).commit()
+    // muestra un fragmento y oculta el otro sin destruirlo
+    private fun showFragment(show: Fragment, hide: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .show(show)
+            .hide(hide)
+            .commit()
     }
 
     private fun setObserver() {
