@@ -47,7 +47,9 @@
                 android:hint="Usuario"
                 android:drawableLeft="@drawable/ic_profile"
                 android:textColor="@color/black"
-                android:drawablePadding="8dp"/>
+                android:drawablePadding="8dp"
+                android:maxLines="1"
+                android:singleLine="true"/>
             <EditText
                 android:id="@+id/et_password"
                 android:layout_width="match_parent"
@@ -72,11 +74,12 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+
     <Button
         android:id="@+id/btn_loginFace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Iniciar con Face ID"
+        android:text="Iniciar con biométricos"
         android:layout_margin="15dp"
         android:backgroundTint="@color/dark_blue"
         />

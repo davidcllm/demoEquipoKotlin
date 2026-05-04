@@ -64,7 +64,7 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_marginEnd="10dp"
-                android:text="Take Photo"
+                android:text="Tomar foto"
                 android:backgroundTint="@color/dark_blue"
 
                 />
@@ -74,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:text="Choose Photo"
+                android:text="Cargar foto"
                 android:backgroundTint="@color/dark_blue"
                 />
         </LinearLayout>
@@ -106,7 +106,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="Face ID"
+                    android:text="Biometricos"
                     android:textSize="20dp" />
 
                 <com.google.android.material.materialswitch.MaterialSwitch
