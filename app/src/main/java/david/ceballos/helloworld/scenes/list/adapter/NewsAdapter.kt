@@ -1,11 +1,8 @@
 package david.ceballos.helloworld.scenes.list.adapter
 
 import android.content.Intent
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.compose.ui.unit.IntRect
-//import androidx.appcompat.R
 import david.ceballos.demo.R
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -55,7 +52,6 @@ class NewsAdapter(private val newsList: List<Article>) : RecyclerView.Adapter<Ne
                 article.url?.let { url ->
                     val intent = Intent(Intent.ACTION_VIEW, url.toUri())
                     holder.itemView.context.startActivity(intent)
-                    }
                 }
             }
 
@@ -67,8 +63,8 @@ class NewsAdapter(private val newsList: List<Article>) : RecyclerView.Adapter<Ne
             }
             else {
                 holder.binding.imgNews.setImageResource(R.drawable.imagedefault)
-
             }
+        }
     }
 
     //Le dice al RecyclerView cuántos elementos hay en total en la lista de noticias

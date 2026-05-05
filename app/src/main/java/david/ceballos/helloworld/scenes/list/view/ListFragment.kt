@@ -12,7 +12,6 @@ import david.ceballos.helloworld.scenes.list.adapter.NewsAdapter
 import david.ceballos.helloworld.scenes.list.worker.ListWorker
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.savedstate.serialization.saved
 import david.ceballos.helloworld.dataClasses.Article
 
 
@@ -33,16 +32,10 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        this.listWorker = ListWorker(requireContext())
-        binding.rvNews.layoutManager = LinearLayoutManager(requireContext())
+        listWorker = ListWorker(requireContext())
         setupRecyclerView(emptyList())
 
-        // Listeners de búsqueda
-        binding.icSearch.setOnClickListener {
-            ejecutarBusqueda()
-        }
-
-        // Si el usuario pulsa "Enter" en el teclado:
+        binding.icSearch.setOnClickListener { ejecutarBusqueda() }
         binding.etSearch.setOnEditorActionListener { _, _, _ ->
             ejecutarBusqueda()
             true
@@ -84,10 +77,10 @@ class ListFragment : Fragment() {
 
     // configura el RecyclerView con una lista vertical, lo inicializa con la lista que se pasó
     private fun setupRecyclerView(initialList: List<Article>) {
-
         binding.rvNews.layoutManager = LinearLayoutManager(requireContext())
         binding.rvNews.adapter = NewsAdapter(initialList)
     }
+
     // reemplaza el adaptador del RecyclerView con los nuevos artículos recibidos del API
     private fun updateNewsList(newArticles: List<Article>){
         Log.d("ListFragment", "Llegaron ${newArticles.size} artículos al fragmento")
@@ -102,7 +95,6 @@ class ListFragment : Fragment() {
     Permite crear una instancia del fragmento con una categoría específica
      se usa desde HomeActivity para pasar la categoría como argumento
     */
-    // TODO: implementar en el buscador de noticias, de momento no se usa
     companion object{
         fun newInstance(category: String): ListFragment {
             val fragment = ListFragment()

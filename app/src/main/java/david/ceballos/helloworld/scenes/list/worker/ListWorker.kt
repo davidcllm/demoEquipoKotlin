@@ -14,8 +14,6 @@ import david.ceballos.helloworld.Networking.APIConstants
 
 import david.ceballos.helloworld.dataClasses.News
 import david.ceballos.helloworld.dataClasses.Article
-import david.ceballos.helloworld.dataClasses.GetPokemon
-import david.ceballos.helloworld.dataClasses.User
 import nombre.apellido.helloworld.Networking.Models.AnahuacAPI
 import org.json.JSONObject
 
@@ -27,13 +25,17 @@ class ListWorker(var context: Context) {
     private val requestManager = RequestManager(context)
     private val gson = Gson()
 
-    // convierte el nombre de la categoría en un keyword para la búsqueda en el API
-    private fun categoryToKeyword(category: String): String = when (category){
-        "tendencias"      -> "noticias"
-        "deportes"        -> "deportes"
-        "entretenimiento" -> "entretenimiento"
-        "politica"        -> "política"
-        else              -> "noticias"
+    private val categoryKeywords = setOf("tendencias", "deportes", "entretenimiento", "politica")
+
+    private fun resolveKeyword(query: String): String {
+        if (query !in categoryKeywords) return query   // búsqueda libre del usuario
+        return when (query) {
+            "tendencias"      -> "noticias"
+            "deportes"        -> "deportes"
+            "entretenimiento" -> "entretenimiento"
+            "politica"        -> "política"
+            else              -> "noticias"
+        }
     }
 
     // obtiene una lista de articulso del API de la categoría especificada
@@ -46,30 +48,22 @@ class ListWorker(var context: Context) {
     {
         // API KEY DE 'newsapi.ai' desde 'local.properties' a través de BuildConfig
         val apiKey = BuildConfig.API_KEY
-        //Log.d(TAG, "API KEY: $apiKey")
-
 
         // Si el query coincide con una categoría predefinida, usa su keyword mapeado
         // Si no, usa el query directamente como búsqueda libre del usuario
-        val keyword = categoryToKeyword(query).let{ mapped ->
-            if (mapped == "noticias" && query != "tendencias") query else mapped
-        }
+        val keyword = resolveKeyword(query)
 
-        // Cuerpo de la petición POST en formato JSON
         val body = JSONObject().apply {
-            put("action", "getArticles")
-            put("keyword", keyword)  //  keyword según la categoría seleccionada
-            put("lang", "spa")     // filtra articulos en español
-            put("articlesPage", 1)  // 1 página de resultados
-            put("articlesCount", 20)    // 20 artículos por página
-            put("articlesSortBy", "date")   // ordena por fecha
-            put("apiKey", apiKey)
+            put(APIConstants.BodyKeys.ACTION, APIConstants.Actions.GET_ARTICLES)
+            put(APIConstants.BodyKeys.KEYWORD, keyword)
+            put(APIConstants.BodyKeys.LANG, APIConstants.DEFAULT_LANGUAGE)
+            put(APIConstants.BodyKeys.ARTICLES_PAGE, APIConstants.DEFAULT_PAGE)
+            put(APIConstants.BodyKeys.ARTICLES_COUNT, APIConstants.DEFAULT_PAGE_SIZE)
+            put(APIConstants.BodyKeys.ARTICLES_SORT_BY, APIConstants.DEFAULT_SORT_BY)
+            put(APIConstants.BodyKeys.API_KEY, apiKey)
         }
-
-        // POST a la URL del API de newsapi.ai
-        // newsapi.ai usa POST con JSON
         val target = AnahuacAPI(
-            url = "https://eventregistry.org/api/v1/article/getArticles",
+            url = APIConstants.MAIN_SERVER + APIConstants.EndPoints.GET_ARTICLES,
             method = HTTPMethod.POST,
             encoding = Encoding.JSON,
             parameters = body

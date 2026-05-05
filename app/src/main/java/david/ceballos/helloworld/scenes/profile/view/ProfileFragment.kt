@@ -11,6 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import david.ceballos.demo.R
 import david.ceballos.demo.databinding.FragmentProfileBinding
 import david.ceballos.helloworld.scenes.base.BaseActivity
 import david.ceballos.helloworld.scenes.help.HelpActivity
@@ -26,11 +27,17 @@ class ProfileFragment : Fragment() {
 
     private val takePicture = registerForActivityResult(ActivityResultContracts.TakePicture()) { iImageSaved ->
         if (iImageSaved)
-            this.binding.ivProfile.setImageURI(this.pictureUri)
+        {
+            binding.ivProfile.setImageURI(pictureUri)
+            viewModel.saveProfileImage(pictureUri)  // guardar
+        }
     }
 
     private val galleryLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-        this.binding.ivProfile.setImageURI(uri)
+        uri?.let {
+            binding.ivProfile.setImageURI(it)
+            viewModel.saveProfileImage(it)          // guardar
+        }
     }
 
     override fun onCreateView(
@@ -40,23 +47,23 @@ class ProfileFragment : Fragment() {
     ): View? {
         this.binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-        this.binding.btnTakePhoto.setOnClickListener {
+        binding.btnTakePhoto.setOnClickListener {
             val prefix = "photo-"
             val postfix = System.currentTimeMillis().toString()
-            val directory = this.requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+            val directory = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
             val photoFile = File.createTempFile(prefix, postfix, directory)
 
-            this.pictureUri = FileProvider.getUriForFile(
-                this.requireContext(),
+            pictureUri = FileProvider.getUriForFile(
+                requireContext(),
                 "david.ceballos.helloworld.fileprovider",
                 photoFile
             )
 
-            this.takePicture.launch(this.pictureUri)
+            takePicture.launch(pictureUri)
         }
 
-        this.binding.btnChoosePhoto.setOnClickListener {
-            this.galleryLauncher.launch("image/*")
+        binding.btnChoosePhoto.setOnClickListener {
+            galleryLauncher.launch("image/*")
         }
 
         configureListeners()
@@ -66,7 +73,22 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        router = ProfileRouter(requireContext(), BaseActivity())
+        router = ProfileRouter(requireContext(), requireActivity() as BaseActivity)
+
+        // Carga la foto guardada si existe
+        viewModel.profileImageUri.observe(viewLifecycleOwner) { uri ->
+            if (uri != null) {
+                try {
+                    binding.ivProfile.setImageURI(uri)
+                } catch (e: SecurityException) {
+                    // La URI expiró — limpiar la preferencia para no volver a intentarlo
+                    viewModel.clearProfileImage()
+                    binding.ivProfile.setImageResource(R.drawable.ic_profile)
+                }
+            }
+
+
+        }
 
         // Sincroniza el switch con el valor persistido
         viewModel.isFaceIdEnabled.observe(viewLifecycleOwner) { isEnabled ->
@@ -77,8 +99,8 @@ class ProfileFragment : Fragment() {
         }
     }
 
+
     private fun configureListeners() {
-        //this.binding.cvHelpCenter.setOnClickListener { this.viewModel.routeToHelpView() }
 
         this.binding.switchConfigFaceID.setOnCheckedChangeListener { _, isChecked ->
             this.viewModel.setFaceIdEnabled(isChecked)
