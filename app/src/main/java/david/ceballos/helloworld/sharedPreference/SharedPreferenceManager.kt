@@ -9,34 +9,28 @@ class SharedPreferenceManager(context: Context) {
         SharedPreferenceConstants.NAME_SHARE_PREFERENCE,
         Context.MODE_PRIVATE
     )
-    private var editor: SharedPreferences.Editor = this.sharedPreference.edit()
 
     fun clearInformation(): Boolean {
         return try {
-            this.editor.clear()
-            this.editor.commit()
-            true
-        }
-        catch (e: Exception) {
+            sharedPreference.edit().clear().commit()
+        } catch (e: Exception) {
             false
         }
     }
 
-    fun setString(key: String, defValue: String) {
-        this.editor.putString(key, defValue)
-        this.editor.commit()
+    fun setString(key: String, value: String) {
+        sharedPreference.edit().putString(key, value).apply()
     }
 
     fun getString(key: String): String {
-        return this.sharedPreference.getString(key, "") ?: ""
+        return sharedPreference.getString(key, "") ?: ""
     }
 
-    fun setBoolean(key: String, defValue: Boolean) {
-        this.editor.putBoolean(key, defValue)
-        this.editor.commit()
+    fun setBoolean(key: String, value: Boolean) {
+        sharedPreference.edit().putBoolean(key, value).apply()
     }
 
     fun getBoolean(key: String): Boolean {
-        return this.sharedPreference.getBoolean(key, false)
+        return sharedPreference.getBoolean(key, false)
     }
 }
