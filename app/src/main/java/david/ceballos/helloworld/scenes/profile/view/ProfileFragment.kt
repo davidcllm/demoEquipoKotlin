@@ -14,7 +14,6 @@ import androidx.fragment.app.activityViewModels
 import david.ceballos.demo.R
 import david.ceballos.demo.databinding.FragmentProfileBinding
 import david.ceballos.helloworld.scenes.base.BaseActivity
-import david.ceballos.helloworld.scenes.help.HelpActivity
 import david.ceballos.helloworld.scenes.profile.router.ProfileRouter
 import david.ceballos.helloworld.scenes.profile.viewModel.ProfileViewModel
 import java.io.File
